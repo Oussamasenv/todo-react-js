@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Tasks from "./Tasks";
+import image from "../assets/icons8-microsoft-to-do-app-48.png"
 
 function TodoApp(){
 
@@ -11,6 +12,7 @@ function TodoApp(){
         const storedTasks = localStorage.getItem('tasks');
         const getTasks = storedTasks? JSON.parse(storedTasks) : [] ;
         setTasks(getTasks)
+        console.log(tasks)
     }, [])
 
 
@@ -43,15 +45,22 @@ function TodoApp(){
 
     return (
         <>
-        <div className=" items-center justify-center bg-white mx-60 my-20 rounded">
-            <div className="py-5 px-10">
-            <span>add your task here: </span>
-            <input id="content" type='text' placeholder="enter a task"></input>
-            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+        <div className="p-2 items-center justify-center bg-white  mx-80 my-20 rounded-lg shadow-lg">
+            <div className="py-5 px-10 flex flex-col">
+            <div  className="flex flex-left items-center">
+                <span className="font-bold text-lg inline-block mr-4">TODO App list </span>
+                <img src={image} alt="image"/>
+            </div>
+            <div className="pt-3 flex">
+            <input className="w-full" id="content" type='text' placeholder="enter a task"></input>
+            <button className="bg-blue-500 hover:bg-blue-700 shadow-indigo-500/40 text-white font-bold py-2 px-4 rounded-full "
             onClick={addTask}
             >add</button>
             </div>
-            <Tasks tasks = {tasks} />
+            </div>
+            <div className="rounded bg-green-100 m-10 p-3">
+                <Tasks tasks = {tasks} />
+            </div>
         </div>
         
         </>
