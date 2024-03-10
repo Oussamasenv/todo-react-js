@@ -1,11 +1,12 @@
-import './App.css'
+import TodoApp from "./components/TodoApp"
+
+
 
 function App() {
 
-  return (
-    <>
-    <h1>
-      TodoApp with react js
+  return ( <>
+  <h1>
+    <TodoApp />
     </h1>
     </>
   )
