@@ -9,9 +9,8 @@ function Tasks(props){
         const delTask = event.target.parentElement.querySelector('span').innerHTML;
         console.log(delTask);
         const newTasksList = props.tasks.filter( task => task.name !== delTask )
-        console.log(newTasksList);
+        // console.log(newTasksList);
         localStorage.setItem('tasks', JSON.stringify(newTasksList));
-
         props.reRender();
 
     }
@@ -27,6 +26,7 @@ function Tasks(props){
                 {
                     props.tasks.map(
                         task => (
+                            <div className="rounded bg-green-100 ml-10 mr-10 mb-4 p-3">
                             <li key={task.id} className="flex justify-between items-center">
                                 <span>{task.name}</span>
                                 <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full"
@@ -34,6 +34,7 @@ function Tasks(props){
                                 >delete</button>
                                 
                             </li>
+                            </div>
                     )
                     )
 

@@ -4,7 +4,7 @@ import image from "../assets/icons8-microsoft-to-do-app-48.png"
 
 function TodoApp(){
 
-    const [reRend, setReRend] = useState(false);
+    const [reRund, setReRund] = useState(false);
     const [tasks, setTasks] = useState([]);
 
 
@@ -13,11 +13,11 @@ function TodoApp(){
         const storedTasks = localStorage.getItem('tasks');
         const getTasks = storedTasks? JSON.parse(storedTasks) : [] ;
         setTasks(getTasks)
-        console.log(getTasks)
-    }, [])
+        // console.log(getTasks)
+    }, [reRund])
 
     useEffect( ()=> {
-        console.log(tasks);
+        // console.log(tasks);
     }, [tasks])
 
 
@@ -34,7 +34,7 @@ function TodoApp(){
         setTasks( prevTasks=> {
             const updatedTask = [...(prevTasks || []), newTask];
             localStorage.setItem('tasks', updatedTask ? JSON.stringify(updatedTask) : []);
-            console.log(tasks);
+            // console.log(tasks);
             return updatedTask
         })
     
@@ -42,7 +42,8 @@ function TodoApp(){
 
 
     const reRendFunc = () => {
-        setReRend(prevState => !prevState);
+        setReRund( reRund => !reRund)
+        
     }
 
     return (
@@ -54,7 +55,7 @@ function TodoApp(){
                 <img src={image} alt="image"/>
             </div>
             <div className="pt-3 flex">
-            <input className="w-full hover:shadow-lg hover:border-blue-400 focus:border-transparent focus:outline-none border border-blue-200 rounded-lg" id="content" type='text' placeholder="enter a task"
+            <input className="w-full hover:shadow-lg hover:border-blue-400 focus:shadow-lg focus:border-transparent focus:outline-none border border-blue-200 rounded-lg pl-5" id="content" type='text' placeholder="enter a task"
             onKeyDown={(e)=> {
                 if (e.key == 'Enter') addTask();
             }
@@ -66,9 +67,9 @@ function TodoApp(){
             >add</button>
             </div>
             </div>
-            <div className="rounded bg-green-100 m-10 p-3">
+            
                 <Tasks tasks = {tasks} reRender = {reRendFunc} />
-            </div>
+            
         </div>
         
         </>
