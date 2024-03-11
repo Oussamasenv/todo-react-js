@@ -12,26 +12,38 @@ function TodoApp(){
         const storedTasks = localStorage.getItem('tasks');
         const getTasks = storedTasks? JSON.parse(storedTasks) : [] ;
         setTasks(getTasks)
-        console.log(tasks)
+        console.log(getTasks)
     }, [])
+
+    useEffect( ()=> {
+        console.log(tasks);
+    }, [tasks])
+
+
 
 
     // console.log(tasks);
 
-    const addTask = () => {
+    const addTask = function() {
 
         const content = document.getElementById('content').value;
         // console.log(content)
 
         const newTask = {
-            id: new Date().getSeconds(),
+            id: new Date().getMilliseconds(),
             name: content,
         }
 
-        setTasks([...tasks, newTask]) 
-        localStorage.setItem('tasks', JSON.stringify(tasks));
-        console.log(tasks);
+        setTasks( prevTasks=> {
+            const updatedTask = [...(prevTasks || []), newTask];
+            localStorage.setItem('tasks', updatedTask ? JSON.stringify(updatedTask) : []);
+            console.log(tasks);
+            return updatedTask
+        })
+    
     }
+
+    
 
     // const addTask = () => {
     //     const content = document.getElementById('content').value;
@@ -52,8 +64,14 @@ function TodoApp(){
                 <img src={image} alt="image"/>
             </div>
             <div className="pt-3 flex">
-            <input className="w-full" id="content" type='text' placeholder="enter a task"></input>
-            <button className="bg-blue-500 hover:bg-blue-700 shadow-indigo-500/40 text-white font-bold py-2 px-4 rounded-full "
+            <input className="w-full hover:shadow-lg hover:border-blue-400 focus:border-transparent focus:outline-none border border-blue-200 rounded-lg" id="content" type='text' placeholder="enter a task"
+            onKeyDown={(e)=> {
+                if (e.key == 'Enter') addTask();
+            }
+            
+            }
+            ></input>
+            <button className="ml-2 bg-blue-500 hover:bg-blue-700 shadow-indigo-500/40 text-white font-bold py-2 px-4 rounded-full "
             onClick={addTask}
             >add</button>
             </div>
