@@ -4,6 +4,7 @@ import image from "../assets/icons8-microsoft-to-do-app-48.png"
 
 function TodoApp(){
 
+    const [reRend, setReRend] = useState(false);
     const [tasks, setTasks] = useState([]);
 
 
@@ -19,10 +20,6 @@ function TodoApp(){
         console.log(tasks);
     }, [tasks])
 
-
-
-
-    // console.log(tasks);
 
     const addTask = function() {
 
@@ -43,17 +40,10 @@ function TodoApp(){
     
     }
 
-    
 
-    // const addTask = () => {
-    //     const content = document.getElementById('content').value;
-    //     const newTask = { name: content };
-      
-    //     setTasks(prevTasks => [...prevTasks, newTask]);
-    //     localStorage.setItem('tasks', JSON.stringify([tasks]));
-    //   };
-      
-
+    const reRendFunc = () => {
+        setReRend(prevState => !prevState);
+    }
 
     return (
         <>
@@ -77,7 +67,7 @@ function TodoApp(){
             </div>
             </div>
             <div className="rounded bg-green-100 m-10 p-3">
-                <Tasks tasks = {tasks} />
+                <Tasks tasks = {tasks} reRender = {reRendFunc} />
             </div>
         </div>
         
